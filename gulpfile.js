@@ -29,7 +29,7 @@ gulp.task('static', ['clean'], () => {
 });
 
 gulp.task('libs', ['static'], () => {
-  return gulp.src(['./node_modules/phaser/dist/phaser.min.js'])
+  return gulp.src('./node_modules/phaser/build/phaser.min.js')
     .pipe(gulp.dest('./build/scripts'));
 });
 
@@ -63,4 +63,4 @@ gulp.task('serve', ['build'], () => {
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'libs', 'build', 'serve']);
+gulp.task('default', ['static', 'libs', 'build', 'serve']);
