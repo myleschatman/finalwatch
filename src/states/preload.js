@@ -20,7 +20,7 @@ export default class Preload extends Phaser.State {
   }
 
   loadResources() {
-    
+    this.game.load.spritesheet('gold_knight', 'assets/sprites/gold_knight_walk.png', 64, 64, 18);
   }
 
   onLoadComplete() {
