@@ -63,4 +63,4 @@ gulp.task('serve', ['build'], () => {
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['static', 'libs', 'build', 'serve']);
+gulp.task('default', ['clean', 'static', 'libs', 'build', 'serve']);
