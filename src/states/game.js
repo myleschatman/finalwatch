@@ -10,8 +10,8 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-	this.player = new Player(this.game);
-    this.add.existing(this.player);
+	  this.assassin = new Player(this.game);
+    this.add.existing(this.assassin);
   }
 
   update() {

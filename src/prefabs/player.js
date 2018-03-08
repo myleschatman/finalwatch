@@ -17,19 +17,11 @@ export default class Player extends Phaser.Sprite {
 		this.body.velocity.y = 0;
 		
 		if (this.cursors.left.isDown) {
-			this.body.velocity =- 180;
+			this.body.velocity.x =- 180;
 		} else if (this.cursors.right.isDown) {
 			this.body.velocity.x =+ 180;
 		} else {
 			this.body.velocity.x = 0;
-		}
-		
-		if (this.cursors.up.isDown) {
-			this.body.velocity.y =- 180;
-		} else if (this.cursors.down.isDown){
-			this.body.velocity.y =+ 180;
-		} else {
-			this.body.velocity.y = 0;
 		}
 	}
 }
