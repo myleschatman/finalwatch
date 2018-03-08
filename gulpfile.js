@@ -6,6 +6,7 @@ const gutil = require('gulp-util');
 const del = require('del');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
+const nodemon = require('gulp-nodemon');
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
 
@@ -52,15 +53,32 @@ gulp.task('build', ['libs'], () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['build'], () => {
-  browserSync.init({
-    server: {
-      baseDir: './build'
-    },
-    browser: 'chrome'
+gulp.task('server', ['build', 'static'], (cb) => {
+  let running = false;
+
+  return nodemon({
+    script: 'server.js'
+  }).on('start', () => {
+    if (!running) {
+      cb();
+      running = true;
+    }
+  }).on('restart', () => {
+    setTimeout(() => {
+      browserSync.reload();
+    }, 2000);
   });
+});
+
+gulp.task('serve', ['server'], () => {
+  browserSync.init({
+    proxy: 'http://localhost:8081',
+    browser: 'chrome',
+    port: 3000
+  });
+  
   gulp.watch('./src/**/*.js', ['build']).on('change', browserSync.reload);
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'libs', 'build', 'serve']);
+gulp.task('default', ['clean', 'static', 'libs', 'build', 'server', 'serve']);
