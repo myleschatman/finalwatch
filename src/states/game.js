@@ -8,13 +8,16 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-	let sprite = this.game.add.sprite(0, 0, 'assassin');
+	/* let sprite = this.game.add.sprite(0, 0, 'assassin');
 	sprite.scale.x = 5;
 	sprite.scale.y = 5;
-	sprite.smoothed = false;
+	sprite.smoothed = false; */
   }
 
   update() {
-
+	this.player = new Player(this.game);
+	this.add.existing(this.player);
+	this.player.position.x = 0;
+	this.player.position.y = 0;
   }
 }
