@@ -6,7 +6,7 @@ class App extends Phaser.Game {
   constructor() {
     super(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
 
-    this.state.add('Boot', Boot);
+    this.state.add('Boot', Boot)
     this.state.add('Preload', Preload);
     this.state.add('Game', Game);
 
