@@ -5,6 +5,10 @@ export default class Game extends Phaser.State {
     super();
   }
 
+  inti() {
+    this.game.stage.disableVisibilityChange = true;
+  }
+
   preload() {
 
   }
