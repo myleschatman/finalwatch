@@ -24,7 +24,7 @@ gulp.task('style', () => {
     .pipe(eslint.failOnError());
 });
 
-gulp.task('static', ['clean'], () => {
+gulp.task('static', () => {
   return gulp.src('./static/**/**')
     .pipe(gulp.dest('./build'));
 });
