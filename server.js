@@ -14,3 +14,21 @@ app.get('/', (req, res) => {
 server.listen(8081, () => {
   console.log('Listening on ' + server.address().port);
 });
+
+server.lastPlayerId = 0;
+
+io.on('connection', (socket) => {
+  socket.on('newplayer', () => {
+    socket.player = {
+      id: server.lastPlayerId++,
+      x: 0,
+      y: 0
+    };
+    console.log(io.sockets.connected);
+    socket.emit('newplayer', socket.player);
+  });
+});
+
+function randomInt(low, high) {
+  return Math.floor(Math.random() * (high - low) + low);
+}
