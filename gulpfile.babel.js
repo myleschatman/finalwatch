@@ -1,14 +1,14 @@
-const gulp = require('gulp');
-const eslint = require('gulp-eslint');
-const buffer = require('gulp-buffer');
-const uglify = require('gulp-uglify');
-const gutil = require('gulp-util');
-const del = require('del');
-const source = require('vinyl-source-stream');
-const babelify = require('babelify');
-const nodemon = require('gulp-nodemon');
-const browserify = require('browserify');
-const browserSync = require('browser-sync').create();
+import gulp from 'gulp';
+import eslint from 'eslint';
+import buffer from 'gulp-buffer';
+import uglify from 'gulp-uglify';
+import gutil from 'gulp-util';
+import del from 'del';
+import source from 'vinyl-source-stream';
+import babelify from 'babelify';
+import nodemon from 'gulp-nodemon';
+import browserify from 'browserify';
+import browserSync from 'browser-sync';
 
 gulp.task('clean', () => {
   del(['build/**/*.*']);
@@ -30,7 +30,9 @@ gulp.task('static', ['clean'], () => {
 });
 
 gulp.task('libs', ['static'], () => {
-  return gulp.src('./node_modules/phaser/build/phaser.min.js')
+  return gulp.src(['./node_modules/phaser/build/phaser.min.js',
+    './node_modules/socket.io-client/dist/socket.io.js'
+  ])
     .pipe(gulp.dest('./build/scripts'));
 });
 
