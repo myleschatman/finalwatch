@@ -1,7 +1,13 @@
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io').listen(server);
+// const express = require('express');
+// const app = express();
+// const server = require('http').Server(app);
+// const io = require('socket.io').listen(server);
+
+import express from 'express';
+import http from 'http';
+
+var app = express();
+var server = http.Server(app);
 
 app.use('/assets', express.static(__dirname + '/build/assets'));
 app.use('/styles', express.static(__dirname + '/build/styles'));
@@ -24,7 +30,6 @@ io.on('connection', (socket) => {
       x: 0,
       y: 0
     };
-    console.log(io.sockets.connected);
     socket.emit('newplayer', socket.player);
   });
 });
