@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import eslint from 'eslint';
+import eslint from 'gulp-eslint';
 import buffer from 'gulp-buffer';
 import uglify from 'gulp-uglify';
 import gutil from 'gulp-util';
