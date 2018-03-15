@@ -4,7 +4,7 @@ export default class Player extends Phaser.Sprite {
 		
 		this.game.physics.arcade.enableBody(this);
 		this.body.collideWorldBounds = true;
-
+		
 		this.scale.x = this.scale.y = 5;
 		this.smoothed = false;
 		this.game.camera.follow(this);
