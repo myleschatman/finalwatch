@@ -20,7 +20,7 @@ export default class Preload extends Phaser.State {
 	}
 	
 	loadResources() {
-		this.game.load.spritesheet('assassin', 'assets/sprites/assassin.png', 64, 64, 18);
+		this.game.load.spritesheet('assassin', 'assets/sprites/assassin.png', 24, 24, 8);
 	}
 	
 	onLoadComplete() {
