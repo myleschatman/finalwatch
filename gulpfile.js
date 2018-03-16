@@ -6,6 +6,7 @@ const gutil = require('gulp-util');
 const del = require('del');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
+const nodemon = require('gulp-nodemon');
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
 
@@ -29,7 +30,9 @@ gulp.task('static', ['clean'], () => {
 });
 
 gulp.task('libs', ['static'], () => {
-  return gulp.src('./node_modules/phaser/build/phaser.js')
+  return gulp.src(['./node_modules/phaser/build/phaser.js',
+  	'./node_modules/socket.io-client/dist/socket.io.js'
+  ])
     .pipe(gulp.dest('./build/scripts'));
 });
 
@@ -52,7 +55,24 @@ gulp.task('build', ['libs'], () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['build'], () => {
+gulp.task('nodemon', ['build', 'static'], (cb) => {
+	let running = false;
+	
+	return nodemon({
+		script: 'server.js'
+	}).on('start', () => {
+		if (!running) {
+			cb();
+			running = true;
+		}
+	}).on('restart', () => {
+		setTimeout(() => {
+			browserSync.reload();
+		}, 2000);
+	});
+});
+
+gulp.task('serve', ['nodemon'], () => {
   browserSync.init({
     server: {
       baseDir: './build'
@@ -63,4 +83,4 @@ gulp.task('serve', ['build'], () => {
   gulp.watch('./static/**/*', ['static']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['clean', 'static', 'libs', 'build', 'serve']);
+gulp.task('default', ['clean', 'static', 'libs', 'build', 'nodemon', 'serve']);
