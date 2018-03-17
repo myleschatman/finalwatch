@@ -3,7 +3,6 @@ export default class Game {
 		this.io = require('socket.io')(app);
 
 		this.lastPlayerId = 0;
-		console.log(this.lastPlayerId);
 		this.io.on('connection', (socket) => {
 			socket.on('newplayer', () => {
 				socket.player = {
