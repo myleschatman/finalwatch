@@ -4,6 +4,7 @@ import Game from './src/server/game.js';
 
 const app = express();
 const server = http.Server(app);
+const io = require('socket.io').listen(server);
 
 app.use('/assets', express.static(__dirname + '/build/assets'));
 app.use('/styles', express.static(__dirname + '/build/styles'));

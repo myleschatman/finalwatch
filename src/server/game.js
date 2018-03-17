@@ -1,11 +1,13 @@
-class Game {
+export default class Game {
 	constructor(app) {
-		this.lastPlayerId = 0;
 		this.io = require('socket.io')(app);
+
+		this.lastPlayerId = 0;
+		console.log(this.lastPlayerId);
 		this.io.on('connection', (socket) => {
 			socket.on('newplayer', () => {
 				socket.player = {
-					id: server.lastPlayerId++,
+					id: this.lastPlayerId++,
 					x: 0,
 					y: 0
 				};

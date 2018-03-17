@@ -1,6 +1,6 @@
 export default class Player extends Phaser.Sprite {
-	constructor(game) {
-		super(game, 0, 0, 'assassin', 0);
+	constructor(game, x, y) {
+		super(game, x, y, 'assassin', 0);
 		
 		this.game.physics.enable(this);
 		this.game.physics.arcade.enableBody(this);
