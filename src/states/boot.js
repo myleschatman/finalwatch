@@ -9,6 +9,9 @@ export default class Boot extends Phaser.State {
 	
 	create() {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
+		
+		this.game.physics.arcade.gravity.y = 100;
+		
 		this.game.state.start('Preload');
 	}
 }

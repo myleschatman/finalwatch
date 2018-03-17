@@ -4,7 +4,7 @@ import Game from './states/game';
 
 class App extends Phaser.Game {
 	constructor() {
-		super(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game');
+		super(600, 600, Phaser.AUTO, 'game');
 		
 		this.state.add('Boot', Boot);
 		this.state.add('Preload', Preload);

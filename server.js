@@ -1,7 +1,9 @@
-const express = require('express');
+import express from 'express';
+import http from 'http';
+import Game from './src/server/game.js';
+
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io').listen(server);
+const server = http.Server(app);
 
 app.use('/assets', express.static(__dirname + '/build/assets'));
 app.use('/styles', express.static(__dirname + '/build/styles'));
@@ -15,15 +17,4 @@ server.listen(8081, () => {
 	console.log('Listening on ' + server.address().port);
 });
 
-server.lastPlayerId = 0;
-
-io.on('connection', (socket) => {
-	socket.on('newplayer', () => {
-		socket.player = {
-			id: server.lastPlayerId++,
-			x: 0,
-			y: 0
-		};
-		socket.emit('newplayer', socket.player);
-	});
-});
+let game = new Game(server);
