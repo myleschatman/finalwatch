@@ -10,7 +10,10 @@ export default class Player extends Phaser.Sprite {
 		this.smoothed = false;
 
 		this.cursors = this.game.input.keyboard.createCursorKeys();
+		this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.game.camera.follow(this.sprite);
+
+		this.jumpTimer = 0;
 	}
 	
 	update() {
@@ -20,6 +23,8 @@ export default class Player extends Phaser.Sprite {
 			this.body.velocity.x =- 180;
 		} else if (this.cursors.right.isDown) {
 			this.body.velocity.x =+ 180;
+		} else if (this.spaceKey.isDown && this.body.onFloor()) {
+			this.body.velocity.y = -180;
 		}
 	}
 }
