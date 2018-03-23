@@ -24,7 +24,7 @@ export default class Player extends Phaser.Sprite {
 		} else if (this.cursors.right.isDown) {
 			this.body.velocity.x =+ 180;
 		} else if (this.spaceKey.isDown && this.body.onFloor()) {
-			this.body.velocity.y = -180;
+			this.body.velocity.y = -280;
 		}
 	}
 }
