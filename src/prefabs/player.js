@@ -1,23 +1,23 @@
 export default class Player extends Phaser.Sprite {
-	constructor(game, x, y) {
+	constructor(game, id, x, y) {
 		super(game, x, y, 'assassin', 0);
-		
-		this.game.physics.enable(this);
-		this.game.physics.arcade.enableBody(this);
 
+		this.id = id;
+		this.game.physics.enable(this);
+		this.game.camera.follow(this);
+		
 		this.body.collideWorldBounds = true;
 		this.scale.x = this.scale.y = 5;
 		this.smoothed = false;
 
 		this.cursors = this.game.input.keyboard.createCursorKeys();
 		this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		this.game.camera.follow(this.sprite);
 
-		this.jumpTimer = 0;
 	}
 	
 	update() {
 		this.body.velocity.x = 0;
+<<<<<<< HEAD
 
 		if (this.cursors.left.isDown && this.spaceKey.isDown) {
 			this.move(-1);
@@ -32,6 +32,9 @@ export default class Player extends Phaser.Sprite {
 		} else if (this.spaceKey.isDown){
 			this.jump();
 		}
+=======
+		
+>>>>>>> 4d57d0386389ac203f049cc3c8e6afb5f779c79d
 	}
 	move(direction) {
 		const SPEED = 180;

@@ -9,6 +9,7 @@ export default class Game extends Phaser.State {
 	
 	init() {
 		this.game.stage.disableVisibilityChange = true;
+		this.playerMap = {};
 	}
 	
 	preload() {
@@ -16,16 +17,25 @@ export default class Game extends Phaser.State {
 	}
 	
 	create() {
-		this.playerMap = {};
 		this.client.getNewPlayer();
+
+		this.cursors = this.game.input.keyboard.createCursorKeys();
+		this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	}
 	
 	update() {
-		
+		if (this.cursors.left.isDown) {
+			this.client.movePlayer('left');
+		}
 	}
 	
 	addNewPlayer(id, x, y) {
-		this.playerMap[id] = new Player(this.game, x, y);
+		this.playerMap[id] = new Player(this.game, id, x, y);
 		this.game.add.existing(this.playerMap[id]);
+	}
+
+	movePlayer(id, x, y) {
+		this.playerMap[id].body.velocity.x = x;
+		this.playerMap[id].body.velocity.y = y;
 	}
 }
