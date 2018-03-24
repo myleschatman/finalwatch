@@ -19,12 +19,32 @@ export default class Player extends Phaser.Sprite {
 	update() {
 		this.body.velocity.x = 0;
 
-		if (this.cursors.left.isDown) {
-			this.body.velocity.x =- 180;
+		if (this.cursors.left.isDown && this.spaceKey.isDown) {
+			this.move(-1);
+			this.jump();
+		} else if (this.cursors.right.isDown && this.spaceKey.isDown) {
+			this.move(1);
+			this.jump();
+		} else if (this.cursors.left.isDown) {
+			this.move(-1);
 		} else if (this.cursors.right.isDown) {
-			this.body.velocity.x =+ 180;
-		} else if (this.spaceKey.isDown && this.body.onFloor()) {
-			this.body.velocity.y = -280;
+			this.move(1);
+		} else if (this.spaceKey.isDown){
+			this.jump();
 		}
+	}
+	move(direction) {
+		const SPEED = 180;
+  		this.body.velocity.x = direction * SPEED;
+	}
+
+	jump() {
+		const JUMP_SPEED = 280;
+		const canJump = this.body.onFloor();
+	  
+		if(canJump){
+		  this.body.velocity.y = - JUMP_SPEED;
+		}
+		return canJump;
 	}
 }
