@@ -12,10 +12,18 @@ export default class Client {
 			for (let i = 0; i < data.length; i++) {
 				game.addNewPlayer(data[i].id, data[i].x, data[i].y);
 			}
+
+			this.socket.on('moveplayer', (data) => {
+				game.movePlayer(data.id, data.x, data.y);
+			});
 		});
 	}
 
 	getNewPlayer() {
 		this.socket.emit('newplayer');
+	}
+
+	movePlayer(direction) {
+		this.socket.emit('moveplayer', direction);
 	}
 }

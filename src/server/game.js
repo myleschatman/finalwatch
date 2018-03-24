@@ -2,7 +2,7 @@ export default class Game {
 	constructor(app) {
 		this.io = require('socket.io')(app);
 		this.lastPlayerId = 0;
-				this.io.on('connection', (socket) => {
+		this.io.on('connection', (socket) => {
 			socket.on('newplayer', () => {
 				socket.player = {
 					id: this.lastPlayerId++,
@@ -11,18 +11,25 @@ export default class Game {
 				};
 				socket.emit('allplayers', this.getAllPlayers());
 				socket.broadcast.emit('newplayer', socket.player);
-			})
-		})
+
+				socket.on('moveplayer', (direction) => {
+					if (direction === 'left') {
+						socket.player.x = -180;
+					}
+					socket.emit('moveplayer', socket.player);
+				});
+			});
+		});
 	}
 
 	getAllPlayers() {
-		var players = []
-		var self = this
+		var players = [];
+		var self = this;
+
 		Object.keys(self.io.sockets.connected).forEach(function (socketID) {
-				var player = self.io.sockets.connected[socketID].player;
-				if (player) players.push(player);
+			var player = self.io.sockets.connected[socketID].player;
+			if (player) players.push(player);
 		});
-		console.log(players);
 		return players;
 	}
 
