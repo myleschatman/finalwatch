@@ -24,7 +24,6 @@ export default class Client {
 	}
 
 	movePlayer(direction) {
-		console.log(direction);
 		this.socket.emit('moveplayer', direction);
 	}
 }

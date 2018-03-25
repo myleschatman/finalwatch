@@ -14,9 +14,9 @@ export default class Game {
 
 				socket.on('moveplayer', (direction) => {
 					if (direction === 'left') {
-						socket.player.x = -180;
+						socket.player.x--;
 					} else if (direction === 'right') {
-						socket.player.x = 180;
+						socket.player.x++;
 					}
 					this.io.emit('moveplayer', socket.player);
 				});

@@ -41,7 +41,6 @@ export default class Game extends Phaser.State {
 	}
 
 	movePlayer(id, x, y) {
-		console.log(id)
 		this.playerMap[id].body.velocity.x = x;
 		this.playerMap[id].body.velocity.y = y;
 	}
