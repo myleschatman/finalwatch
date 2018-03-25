@@ -26,7 +26,13 @@ export default class Game extends Phaser.State {
 	update() {
 		if (this.cursors.left.isDown) {
 			this.client.movePlayer('left');
+		} else if (this.cursors.right.isDown) {
+			this.client.movePlayer('right');
 		}
+	}
+
+	render() {
+		this.game.debug.text(this.game.time.fps, 2, 14, '#00FF00');
 	}
 	
 	addNewPlayer(id, x, y) {
@@ -35,6 +41,7 @@ export default class Game extends Phaser.State {
 	}
 
 	movePlayer(id, x, y) {
+		console.log(id)
 		this.playerMap[id].body.velocity.x = x;
 		this.playerMap[id].body.velocity.y = y;
 	}

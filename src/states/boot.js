@@ -4,6 +4,7 @@ export default class Boot extends Phaser.State {
 	}
 	
 	preload() {
+		this.game.time.advancedTiming = true;
 		this.load.image('preloader', 'assets/preloader.gif');
 	}
 	

@@ -7,7 +7,7 @@ export default class Game {
 				socket.player = {
 					id: this.lastPlayerId++,
 					x: this.randomInt(100, 400),
-					y: this.randomInt(100, 400)
+					y: 996
 				};
 				socket.emit('allplayers', this.getAllPlayers());
 				socket.broadcast.emit('newplayer', socket.player);
@@ -15,8 +15,10 @@ export default class Game {
 				socket.on('moveplayer', (direction) => {
 					if (direction === 'left') {
 						socket.player.x = -180;
+					} else if (direction === 'right') {
+						socket.player.x = 180;
 					}
-					socket.emit('moveplayer', socket.player);
+					this.io.emit('moveplayer', socket.player);
 				});
 			});
 		});
